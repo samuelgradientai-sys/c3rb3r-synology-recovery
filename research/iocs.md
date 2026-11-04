@@ -62,18 +62,19 @@ Que las direcciones coincidan no significa que la llave sirva: **la maestra es a
   del atacante como la víctima. No se comparten, ni con quien ofrezca "rescate".
 - El hash de un archivo cifrado concreto: no identifica el malware, identifica a quien lo tiene.
 
-## Superficie expuesta
+## Superficie expuesta y parches: son DOS avisos, y manda el más nuevo
 
-Shadowserver rastrea **más de 380.000 NAS Synology** con la interfaz publicada en internet. La campaña
-explota una vulnerabilidad parcheada en **diciembre de 2024** (SA-24:20: CVE-2024-10441 ejecución de
-código, CVE-2024-50629 lectura de archivos, CVE-2024-10445 escritura). Versiones corregidas:
+Shadowserver rastrea **más de 380.000 NAS Synology** con la interfaz publicada en internet. Hay dos
+avisos implicados y confundirlos deja equipos a la intemperie:
 
-| DSM | Versión mínima |
-|---|---|
-| 7.2.2 | 7.2.2-72806-1 |
-| 7.2.1 | 7.2.1-69057-6 |
-| 7.2 | 7.2-64570-4 |
-| 7.1 | 7.1.1-42962-7 |
-| 6.2 | 6.2.4-25556-8 |
+| Aviso | CVE | Builds corregidos |
+|---|---|---|
+| **SA-24:20** (dic-2024) — el vector de entrada original | CVE-2024-10441 (RCE root), CVE-2024-50629 (lectura), CVE-2024-10445 (escritura) | 7.2.2-72806-1 · 7.2.1-69057-6 · 7.2-64570-4 · 7.1.1-42962-7 · 6.2.4-25556-8 |
+| **SA-26:13** (sep-2026) — el que fija la barra hoy | CVE-2026-13684 (SCGI, CWE-116, CVSS 9.8), CVE-2026-13639 (entropía del login, 9.8) y seis más | **7.4-90075 · 7.3.2-86009-4 · 7.2.2-72806-9 · 7.2.1-69057-12** |
 
-Aviso oficial: Synology, 2-nov-2026 · difundido por BleepingComputer con respuesta de la empresa.
+Los CVE de SA-26:13 dicen "**before** 7.2.2-72806-9": un equipo en **72806-1** —el mínimo de SA-24:20—
+sigue afectado. El build de referencia es el más alto de las dos tablas, no el de la primera.
+7.1.1 y 6.2 no figuran en SA-26:13 porque esa rama no está soportada ahí, no porque estén a salvo.
+
+Aviso de la campaña: Synology, 2-nov-2026 · difundido por BleepingComputer con respuesta de la empresa.
+Tabla de SA-26:13 verificada en el aviso original (synology.com/en-global/security/advisory/Synology_SA_26_13).

@@ -47,6 +47,7 @@ no sirve. Sin llave no hay descifrado mágico; lo que se rescata es lo que el ci
 ```
 docs/                 informe del incidente, bitácora de estado y notas de investigación
 docs/references/      formato .L0CK3D, transporte, tallado, compatibilidad, trampas
+docs/CHECKLIST-ventana-viva.md   qué hacer si el cifrador sigue corriendo (orden, puertas, parches)
 research/             lo que vamos averiguando: hallazgos, repositorios y fuentes evaluadas
 scripts/              kit del NAS (Python, solo lectura) + reparadores por formato
 scripts/hjs/          driver original del método bookend (referencia)
@@ -87,6 +88,13 @@ cortar y relanzar sin repetir trabajo.
   `results/fotos_resumen.txt`.
 - **Pool de Active Backup**: 1.071 GB, 28 de ~105 lotes; el 88 % de esos archivos (`0x25`) está en claro.
 - **Espacio libre**: 355.751 objetivos de tallado listos (97.161 pares tipo/tamaño).
+
+## Clave candidata publicada: sirve para un incidente, no para todos
+
+El repositorio de referencia publica la maestra del incidente del **28-oct-2026**. Está **publicada pero no
+es universal**: validada solo contra ese incidente, y en este caso el chequeo de nonce la rechaza. Probarla
+en otro equipo es perder el tiempo, y peor: creer que falló el perfil cuando falló la premisa. Si extraes
+tu propia maestra, la validación es por archivo y por modo, con un original conocido siempre que exista.
 
 ## Límites conocidos
 
