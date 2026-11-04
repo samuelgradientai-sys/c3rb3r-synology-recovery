@@ -23,3 +23,4 @@ fecha,tema,hallazgo,fuente,veredicto
 2026-11-04,video,Validar video con 'ffmpeg -xerror' da entre 2% y 22% de falsos negativos (un frame malo descarta un archivo que sí reproduce); usar criterio suave: decodificar 3 s,soimy issue #23 (hjs),referencia
 2026-11-04,ext4,Caso EXT4 + reiniciado + sin snapshots ni backups: sin copy-on-write no hay ruta conocida sin llave; el hilo sigue abierto esperando análisis de espacio libre y journaling,soimy issue #22,teoria
 2026-11-04,carving,"El PR crt106#1 empaqueta el carving de espacio libre con 237 líneas de tests y sigue sin fusionar: se usa desde el PR o la rama, no desde main",crt106 PR #1 (herakles-cow),confirmado
+2026-11-04,jpeg,Asumir una sola geometria de sensor pierde 1 de cada 7 fotos: 454 de 3.412 (13%) venian de otra camara o eran escaneos y solo se recuperaron al inferir la geometria del propio scan,prueba propia (3.412 fotos),confirmado

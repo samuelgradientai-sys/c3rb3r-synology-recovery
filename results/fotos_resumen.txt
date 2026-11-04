@@ -6,19 +6,18 @@ RECUPERADAS: 3.228  (94,6 %)  —  6,56 GB
   · por cabecera de muestra (sensor de 4096 px): 2.774
   · por geometria inferida del propio archivo:     454
 
-FALLOS: 184 (5,4 %)
+FALLOS: 184 (5,4 %) — definitivos, no recuperables sin la llave
   ·  83  modo 0x25 (varios tramos en cero): el scan no queda decodificable
-  ·  67  tiempo agotado en la inferencia de geometria (archivos de 5-8 MB; ver nota)
-  ·  33  modo 0x26 sin scan decodable tras la zona cifrada
-  ·   1  marcadores de reinicio que no cuadran
+  · 101  modo 0x26 sin scan decodificable tras la zona cifrada
+         (67 de ellos se reintentaron con 600 s de presupuesto: 0 recuperados)
 
 NOTAS
-- El primer intento asumia una sola geometria (4096 px). Las fotos de otra camara o
-  escaneadas (cedulas, registros) fallaban; se corrigio con un segundo camino que
-  infiere la geometria del propio scan. Eso recupero 454 fotos.
-- Las 67 por tiempo son candidatas a reintento con mas presupuesto: son archivos
-  grandes donde la inferencia tarda mas de 260 s.
-- Ninguna foto se perdio por dano: lo que falla es la cabecera o el propio scan.
+- El primer intento asumia una sola geometria (4096 px). 1 de cada 7 fotos viene de
+  otra camara o es un escaneo (cedulas, registros de auditoria) y fallaba; se corrigio
+  con un segundo camino que infiere la geometria del propio scan. Eso recupero 454.
+- El reintento con el triple de tiempo sobre los 67 mas lentos devolvio 0: cuando la
+  inferencia no cierra en 260 s, el archivo tampoco cierra en 600 s. No merece otra pasada.
+- Ninguna foto se perdio por dano del rescate: lo que falla es la cabecera o el propio scan.
 
 Metodo: DRCRecoveryData/JPEG_Recovery (jpegmedic), orquestado en rescatar_fotos.py
-(7 procesos, re-ejecutable, indice CSV por archivo).
+(7 procesos, re-ejecutable, indice CSV por archivo) y reintentar_lentos.py.
