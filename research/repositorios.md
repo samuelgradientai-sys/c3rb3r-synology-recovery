@@ -45,6 +45,15 @@ real, no por popularidad. Última revisión: 3-nov-2026.
 - [weilizhang0813-eng/C3RB3R](https://github.com/weilizhang0813-eng/C3RB3R) — investigación del formato; sin descifrador funcional.
 - [sunkangbo121-ship-it/c3rb3r-btrfs-extent-rescue](https://github.com/sunkangbo121-ship-it/c3rb3r-btrfs-extent-rescue) — extents de Btrfs; midió 117 de 6.725 `0x24` recuperados.
 
+## Nuevos (4-nov-2026), sin probar todavía
+
+| Repositorio | Qué aporta | Estado |
+|---|---|---|
+| [ychcom/L0CK3D-recovery](https://github.com/ychcom/L0CK3D-recovery) | Caso completo en VM con pRDM: metodología, herramientas y —lo más útil— la lista de **8 vías descartadas con el motivo**. Su caso: 156.127 cifrados, 8.326 recuperados (47 GB), 1.709 completos. | Documentación, no kit: se lee, no se corre. |
+| [sgInnora/innora-cve-research](https://github.com/sgInnora/innora-cve-research) | Causa raíz de **CVE-2024-10441** (`synoplugind`, inyección de variables de entorno → RCE root, CWE-116), con entorno QEMU reproducible y cadena verificada. Es el vector de entrada de la campaña. | Referencia para el informe de entrada; no interviene en el rescate. |
+| [MRdark-ops/scanner-syno](https://github.com/MRdark-ops/scanner-syno) | Escáner **de solo lectura** que detecta CVE-2024-10441 y CVE-2026-13684/13639 sin ejecutar exploits; incluye BeeStation OS. | Candidato para verificar el parque del cliente. Revisar el código antes de correrlo. |
+| [SecurityRonin/btrfs-forensic](https://github.com/SecurityRonin/btrfs-forensic) | Lector de btrfs en Rust (Apache-2.0): chunk tree, fs-tree, raíces viejas, bloques con csum roto, inodos huérfanos y archivos borrados carvables de una generación anterior. | **El más interesante sin probar**: sería una segunda opinión al `c3r_btrfs.py` en Python. |
+
 ## Estado de los repos clave (4-nov-2026)
 
 - **crt106/c3rb3r-btrfs-recovery** — el PR #1 (`herakles-cow`) añade `scripts/c3r_carve.py` con 237 líneas

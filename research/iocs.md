@@ -26,12 +26,33 @@ Que las direcciones coincidan no significa que la llave sirva: **la maestra es a
 | `208.87.128.140:4001` | Shell inverso reportado tras la intrusión (dossier de la comunidad). |
 | `46.8.78.122`, ruta `/xdy5.6xc?x86_64` | Origen de descarga del cifrador, recuperado del atributo extendido `user.xdg.origin.url` en dos víctimas independientes. |
 
+## Vector de entrada (documentado el 4-nov-2026)
+
+- **CVE-2024-10441** — `synoplugind` del DSM: inyección de variables de entorno que rompe el
+  *framing* del plugin y termina en **ejecución de código como root sin autenticación** (CWE-116,
+  CVSS 9.8, en el catálogo KEV de CISA). Análisis de causa raíz con entorno reproducible publicado
+  por Innora Security Research.
+- Vectores secundarios: **CVE-2024-50629** (lectura arbitraria de archivos) y **CVE-2024-10445**
+  (escritura arbitraria vía MITM del actualizador).
+- La campaña usa una falla **parcheada en diciembre de 2024**. Un DSM sin actualizar desde entonces
+  está expuesto aunque tenga QuickConnect en vez de puertos abiertos.
+
 ## Archivos en disco
 
 - Extensión `.L0CK3D` (con cero) en cada archivo cifrado.
 - `read-me3.txt` («C3RB3R INSTRUCTIONS») en cada carpeta.
-- Footer de **588 bytes** al final de cada archivo cifrado: `marcador[568:572]` · `modo[572]` ·
-  `pct[573]` · `cripto[574]` · `tamaño original[-8:]`.
+- Footer de **588 bytes** al final de cada archivo cifrado. Medido en nuestras muestras, tiene cuatro
+  zonas (no dos):
+
+| Offset | Bytes | Contenido |
+|---|---|---|
+| 0 | 48 | Clave de archivo envuelta (sin un solo byte en cero) |
+| 48 | 256 | Bloque RSA-2048 del atacante |
+| 304 | 264 | Relleno en cero — reservado |
+| 568 | 20 | `marcador[568:572]` · `modo[572]` · `pct[573]` · `cripto[574]` · `tamaño original[-8:]` |
+
+  La zona de 520 B que algunos análisis describen como "área RSA" son 256 B útiles más 264 B de ceros;
+  saberlo evita parsers que se comen el relleno como si fuera ciphertext.
 
 ## Lo que NO es un IOC compartible
 

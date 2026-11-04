@@ -11,6 +11,7 @@ Ordenados por resultado. Actualizado: 4-nov-2026.
 | hjs785053766 | Btrfs 97% lleno | Muerto, sin llave | CoW viejo + bookend + 0x25 + carving + Drive | 205.973 archivos / 1,03 TB → **65,4%** (fotos 97,9%, video 99,4%, <1 MB ~55%) |
 | sunkangbo121 | Volumen CoW | Muerto, sin llave | Extents + carving de espacio libre | 0x26 99,8% · 0x25 98,2% · **0x24 1,7%** (117 de 6.725) |
 | miyanagaaoi | Volumen Btrfs | Muerto, sin llave | Delta, carving, verificación por csum | 1.295.238 archivos → 73.809 = **9,42% de archivos / 21,37% de bytes** |
+| ychcom (VM + pRDM) | Btrfs sin snapshots | Muerto, sin llave | Inversión de CoW generación a generación | 156.127 cifrados → **8.326 archivos (47 GB)**, de ellos 1.709 completos (23 GB) |
 | Creeper-OF | Btrfs, dos volúmenes, NoCOW | Muerto | Forense de disco y memoria | 885.014 objetos Btrfs; parte irrecuperable, sin llave |
 | lllong1377 | Sin reiniciar en 149 días | Muerto 30 h antes | Memoria (tarde) | **0%**: el proceso ya no estaba |
 | felixfungys (abierto) | **EXT4**, reiniciado, sin snapshots | Muerto | Imagen forense de 4 discos (en curso) | **Pendiente**: sin CoW no hay ruta conocida |
