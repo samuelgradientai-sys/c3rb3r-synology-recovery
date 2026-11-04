@@ -1,0 +1,32 @@
+{
+  "_说明": "复制成 config.json 后填写。所有脚本路径都相对于工具箱根目录。",
+  "dev": "/dev/mapper/cachedev_0",
+  "share": "/volume1/homes/<user>/Photos",
+  "out_root": "F:\\恢复数据_<user>",
+  "work_dir": "F:\\work",
+  "ffmpeg": "E:\\剪映\\JianyingPro\\10.5.0.13988\\ffmpeg.exe",
+  "ssh": {
+    "host": "<192.168.x.x>",
+    "user": "<user>",
+    "port": 22,
+    "askpass": "%TEMP%\\askpass.exe"
+  },
+  "min_free_gb": {
+    "C": 20,
+    "D": 5,
+    "E": 5,
+    "F": 5
+  },
+  "thresholds": {
+    "a_class_min_success": 0.60,
+    "bookend_min_hit": 0.25,
+    "b_class_min_success": 0.30,
+    "c_class_min_match": 0.10,
+    "max_decode_fail_rate": 0.05
+  },
+  "limits": {
+    "a_class_max_bytes": 134217728,
+    "footer_size": 588,
+    "noatime_flag": 262144
+  }
+}

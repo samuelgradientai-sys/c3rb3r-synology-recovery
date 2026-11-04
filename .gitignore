@@ -1,0 +1,43 @@
+# Datos y artefactos que NUNCA se suben
+acceso/
+*.key
+*.pem
+.id_key
+nas_key*
+
+# Datos del cliente
+share_crudo/
+salida/
+entradas_recuperadas/
+onedrive_3pl/
+ANLA_2026/
+*.L0CK3D
+*.xlsx
+*.pdf
+*.zip
+*.pst
+*.jpg
+*.jpeg
+*.png
+*.tif
+*.tiff
+*.docx
+*.xls
+
+# Restos de corrida
+*.part
+*.bak-*
+__pycache__/
+*.pyc
+.venv/
+venv/
+_fotos_run.out
+_hechos.txt
+_progreso.log
+_estado/
+
+# Secretos
+.env
+.env.*
+*.token
+credentials*

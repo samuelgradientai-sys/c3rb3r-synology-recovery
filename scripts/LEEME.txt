@@ -1,0 +1,37 @@
+# Kit para el NAS — C3RB3R / caso real
+
+Todo aquí es **solo lectura** sobre el NAS. Nada escribe en los volúmenes de datos.
+
+```
+kit_nas/
+├─ CHECKLIST.md              <- LEER PRIMERO
+├─ paso0_evidencia.sh        <- qué pasó y en qué estado está (solo lectura)
+├─ targets_desde_survey.py   <- arma la lista de archivos a intentar rescatar
+└─ scripts/
+   ├─ c3r_btrfs.py           preflight / survey / extract (por SSH, root)
+   ├─ c3r_carve.py           carving del espacio libre (la herramienta nueva)
+   ├─ c3r_local.py           análisis local de los resultados
+   └─ mkjob.py               empaqueta el script para mandarlo por SSH
+```
+
+## Orden, sin saltarse pasos
+
+1. **Sin internet.** Desconectar el cable/WiFi del NAS antes de tocarlo.
+2. `sh paso0_evidencia.sh > /tmp/evidencia_cliente.txt 2>&1` y guardar ese archivo.
+3. Revisar **snapshots** en `/volume1/@sharesnap/` — si hay, es la vía más rápida y completa.
+4. `python3 scripts/c3r_btrfs.py preflight /volume1/<share>/<archivo>.L0CK3D`
+5. `python3 scripts/c3r_btrfs.py survey /volume1/<share> > survey.jsonl.gz`
+6. Carving solo si el paso 3 no dio nada: `c3r_carve.py freemap` y luego `scan`.
+
+## Lo que NO se hace
+
+- No actualizar DSM, no reiniciar, no resetear, no reinstalar.
+- No `scrub`, no `balance`, no `defrag`, no borrar nada.
+- No borrar los `.L0CK3D`, no vaciar la papelera (`#recycle`).
+- No montar el volumen en escritura ni copiar archivos grandes dentro.
+- No instalar programas dentro de `/volume1`: los scripts van a `/tmp` o a un USB.
+
+## Probado antes de entregarlo
+
+- `c3r_carve.py` en modo `--image`, sobre una imagen de 24 MB con un PDF en el offset 8 MiB:
+  lo encontró en 0 segundos, con el **MD5 exacto** del original.

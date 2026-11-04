@@ -1,0 +1,5 @@
+inventario NAS: 207739 tamaños distintos
+procesados ahora: 0 · total en índice: 21046
+estado: {'perfecto': 3434, 'dañado': 17612}
+tipo: {'pdf': 19931, 'docx': 3, 'xlsx': 97, 'zip': 1015}
+coincidencia: {'exacta': 2809, 'ambigua': 566, 'sin coincidencia': 17671}
