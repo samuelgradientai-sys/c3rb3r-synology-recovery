@@ -77,12 +77,14 @@ python3 scripts/rescatar_fotos.py                 # fotos JPG: cabecera trasplan
 `traer_*` y `rescatar_*` son **reanudables**: guardan progreso y saltan lo ya hecho, así que se pueden
 cortar y relanzar sin repetir trabajo.
 
-## Cifras de la operación (3-nov-2026)
+## Cifras de la operación (4-nov-2026)
 
 - Inventario: **731.473** archivos `.L0CK3D`; modos de daño censados archivo por archivo.
 - **Share**: 13.630 archivos procesados, **7.861 con algo recuperado**; PDF **6.270 de 7.961**
   (62.875 páginas) y **107.090 imágenes** extraídas de documentos.
-- **Fotos Share**: 3.412 JPG, recuperadas por trasplante de cabecera (~1.000/hora con 7 procesos).
+- **Fotos del share prioritario**: **3.228 de 3.412 (94,6 %)** recuperadas por trasplante de cabecera.
+  454 de ellas necesitaron inferir la geometría del sensor en el propio archivo. 6,56 GB. Detalle en
+  `results/fotos_resumen.txt`.
 - **Pool de Active Backup**: 1.071 GB, 28 de ~105 lotes; el 88 % de esos archivos (`0x25`) está en claro.
 - **Espacio libre**: 355.751 objetivos de tallado listos (97.161 pares tipo/tamaño).
 
