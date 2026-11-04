@@ -62,19 +62,24 @@ Que las direcciones coincidan no significa que la llave sirva: **la maestra es a
   del atacante como la víctima. No se comparten, ni con quien ofrezca "rescate".
 - El hash de un archivo cifrado concreto: no identifica el malware, identifica a quien lo tiene.
 
-## Superficie expuesta y parches: son DOS avisos, y manda el más nuevo
+## Superficie expuesta y parches: cuál es la puerta y cuál el hardening
 
 Shadowserver rastrea **más de 380.000 NAS Synology** con la interfaz publicada en internet. Hay dos
 avisos implicados y confundirlos deja equipos a la intemperie:
 
 | Aviso | CVE | Builds corregidos |
 |---|---|---|
-| **SA-24:20** (dic-2024) — el vector de entrada original | CVE-2024-10441 (RCE root), CVE-2024-50629 (lectura), CVE-2024-10445 (escritura) | 7.2.2-72806-1 · 7.2.1-69057-6 · 7.2-64570-4 · 7.1.1-42962-7 · 6.2.4-25556-8 |
-| **SA-26:13** (sep-2026) — el que fija la barra hoy | CVE-2026-13684 (SCGI, CWE-116, CVSS 9.8), CVE-2026-13639 (entropía del login, 9.8) y seis más | **7.4-90075 · 7.3.2-86009-4 · 7.2.2-72806-9 · 7.2.1-69057-12** |
+| **SA-24:20** (dic-2024) — **la puerta que usaron** | CVE-2024-10441 (RCE root), CVE-2024-50629 (lectura), CVE-2024-10445 (escritura) | **7.2.2-72806-1 · 7.2.1-69057-6 · 7.2-64570-4 · 7.1.1-42962-7 · 6.2.4-25556-8** |
+| SA-26:13 (sep-2026) — hardening, no el vector | CVE-2026-13684 (SCGI, CWE-116), CVE-2026-13639 (entropía del login) y seis más | 7.4-90075 · 7.3.2-86009-4 · 7.2.2-72806-9 · 7.2.1-69057-12 |
 
-Los CVE de SA-26:13 dicen "**before** 7.2.2-72806-9": un equipo en **72806-1** —el mínimo de SA-24:20—
-sigue afectado. El build de referencia es el más alto de las dos tablas, no el de la primera.
-7.1.1 y 6.2 no figuran en SA-26:13 porque esa rama no está soportada ahí, no porque estén a salvo.
+**Cuál manda para esta campaña:** el comunicado de Synology del **29-oct-2026** dice literalmente que se
+está explotando "a vulnerability patched in December 2024" y enlaza **SA-24:20**. Es decir, la puerta es
+SA-24:20 y la mayoría de las víctimas de la oleada estaban por debajo de *ese* build, no del de SA-26:13.
+360 atribuye los casos a SA-26:13; no está confirmado y el fabricante apunta a lo otro. No son
+incompatibles —dos puertas distintas—, pero para entender el incidente manda SA-24:20.
+
+Parchear a los builds de SA-26:13 sigue siendo lo correcto (son fallos críticos posteriores y un equipo
+en 72806-1 los tiene abiertos), pero no es lo que explica esta infección.
 
 Aviso de la campaña: Synology, 2-nov-2026 · difundido por BleepingComputer con respuesta de la empresa.
 Tabla de SA-26:13 verificada en el aviso original (synology.com/en-global/security/advisory/Synology_SA_26_13).

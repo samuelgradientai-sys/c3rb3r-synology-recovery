@@ -45,6 +45,12 @@ real, no por popularidad. Última revisión: 3-nov-2026.
 - [weilizhang0813-eng/C3RB3R](https://github.com/weilizhang0813-eng/C3RB3R) — investigación del formato; sin descifrador funcional.
 - [sunkangbo121-ship-it/c3rb3r-btrfs-extent-rescue](https://github.com/sunkangbo121-ship-it/c3rb3r-btrfs-extent-rescue) — extents de Btrfs; midió 117 de 6.725 `0x24` recuperados.
 
+## Para trabajar offline con los discos (no específico de C3RB3R)
+
+| Repositorio | Qué aporta | Estado |
+|---|---|---|
+| [007revad/Synology_Recover_Data](https://github.com/007revad/Synology_Recover_Data) | Montar los discos del Synology en un PC (Linux) y leer el volumen sin el NAS vivo: MD-RAID + LVM + Btrfs. 96★, MIT. | **El complemento natural de la imagen forense**: permite montar en solo lectura y trabajar sin depender del equipo encendido. |
+
 ## Nuevos (4-nov-2026), sin probar todavía
 
 | Repositorio | Qué aporta | Estado |
@@ -54,11 +60,27 @@ real, no por popularidad. Última revisión: 3-nov-2026.
 | [MRdark-ops/scanner-syno](https://github.com/MRdark-ops/scanner-syno) | Escáner **de solo lectura** que detecta CVE-2024-10441 y CVE-2026-13684/13639 sin ejecutar exploits; incluye BeeStation OS. | Candidato para verificar el parque del cliente. Revisar el código antes de correrlo. |
 | [SecurityRonin/btrfs-forensic](https://github.com/SecurityRonin/btrfs-forensic) | Lector de btrfs en Rust (Apache-2.0): chunk tree, fs-tree, raíces viejas, bloques con csum roto, inodos huérfanos y archivos borrados carvables de una generación anterior. | **El más interesante sin probar**: sería una segunda opinión al `c3r_btrfs.py` en Python. |
 
+## Límites verificados en el código de crt106 (4-nov-2026)
+
+Leído en `c3r_btrfs.py`, no en su README:
+
+- La fórmula de franjas del `0x25` solo se aplica si el parámetro de porcentaje es **10**:
+  `if mode == 0x25 and pct == 0x0a`. Un `0x25` con otro `pct` **no se modela** y hay que derivar los
+  rangos a mano.
+- Su `parse_footer` es más laxo que el de soimy: se queda con modo, marcador y tamaño original, y no
+  valida el byte de cifrado real/señuelo (`0x20`/`0x21`).
+- No cubre perfiles rayados (striped), extents comprimidos ni inline.
+
+En el pool de Active Backup medido aquí, **todos los `0x25` son `pct=10`**, así que esa limitación no
+aplica a ese conjunto; sí puede aplicar a shares donde el cifrador usó otro porcentaje.
+
 ## Estado de los repos clave (4-nov-2026)
 
 - **crt106/c3rb3r-btrfs-recovery** — el PR #1 (`herakles-cow`) añade `scripts/c3r_carve.py` con 237 líneas
   de tests y sigue **sin fusionar**. El carving de espacio libre se usa desde el PR o desde la rama, no
   desde `main`. Es el repo que más se está moviendo.
+- **akari-sora/synology-nas-cli** — trae `docs/INCIDENT-C3RB3R.md` (y versiones en chino) con la
+  cronología del incidente: útil para el informe al cliente, no para el rescate.
 - **soimy/c3rb3r-rescue** — los issues son la fuente viva: #22 (EXT4 sin ruta), #23 (caso del 65% con las
   cinco vías), #24 (memoria sin `capture.json`: leer los 48 B en `0x5427f8`), #10 (xattr de descarga como IOC).
 - **hjs785053766/c3rb3r-btrfs-recovery** — publicado con 37 scripts y manual en chino; su quinta vía

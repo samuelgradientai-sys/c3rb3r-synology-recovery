@@ -23,6 +23,7 @@ DeadBolt en Emsisoft, por ejemplo, exige la llave que dan los atacantes después
 | Reddit r/synology | `www.reddit.com/r/synology/new.rss` funciona con User-Agent propio; el JSON da 403 y ráfagas dan 429. Dos lecturas con 20 s entre ellas. |
 | BleepingComputer (hilos 780618 y 819759) | Por HTTP; los ids van con comilla simple (`id='post_id_N'`). Si el fetch directo falla, `https://r.jina.ai/<url>` devuelve el markdown completo. |
 | nashub.vn, l0ck3d.com | Bitácoras de casos en vivo; útiles para cifras de recuperación. |
+| **V2EX** (`v2ex.com/t/1252851`) | Caso en chino de una víctima que sacó la clave de la memoria del proceso. Es el tipo de material que no aparece buscando en inglés: los casos de esta cepa se concentran en V2EX, 看雪 y 360. |
 | linux.do, v2ex | 403 a clientes automáticos. Discord no es indexable. |
 | Guías tipo `howtoremove.guide` | Publicidad de SpyHunter. No instalar nada de ahí. |
 
