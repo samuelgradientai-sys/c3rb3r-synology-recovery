@@ -63,6 +63,21 @@ Tres trampas de ese comando, que es fácil correr mal:
 datos viejos hay que apuntar a una **raíz anterior** (`btrfs-find-root -a`, y luego `btrfs restore -r
 <id>`), y hacerlo contra un montaje de solo lectura o una imagen, no contra el volumen vivo.
 
+## Anatomía del daño: qué proporción se puede rescatar
+
+Medido sobre un inventario real de **731.473 archivos cifrados** (leído del footer de cada uno):
+
+| Modo | Archivos | % de archivos | Bytes | Qué se conserva |
+|---|---|---|---|---|
+| `0x24` | 549.261 | 75,1 % | 91 GB | Nada: cifrado completo (archivos pequeños) |
+| `0x26` | 167.920 | 23,0 % | 365 GB | Todo menos el primer MiB |
+| `0x25` | 14.292 | 2,0 % | **1.971 GB** | Todo menos 3-5 tramos (~12 %) |
+
+La lección del reparto: **por archivos, tres cuartas partes están perdidas; por bytes, el 96 % está en los
+modos parciales**. El esfuerzo va donde está el tamaño, no donde está el conteo. Y entre los archivos
+parciales más grandes de un NAS de oficina siempre aparecen los buzones `.pst` (33-48 GB en `0x25`), que
+son justo lo que más duele perder.
+
 ## D. Archivos grandes parcialmente cifrados
 
 Es el margen técnico real. `inspect_footer.py` dice qué rangos se cifraron y el tamaño original. Sobre
