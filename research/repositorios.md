@@ -45,6 +45,16 @@ real, no por popularidad. Última revisión: 3-nov-2026.
 - [weilizhang0813-eng/C3RB3R](https://github.com/weilizhang0813-eng/C3RB3R) — investigación del formato; sin descifrador funcional.
 - [sunkangbo121-ship-it/c3rb3r-btrfs-extent-rescue](https://github.com/sunkangbo121-ship-it/c3rb3r-btrfs-extent-rescue) — extents de Btrfs; midió 117 de 6.725 `0x24` recuperados.
 
+## Estado de los repos clave (4-nov-2026)
+
+- **crt106/c3rb3r-btrfs-recovery** — el PR #1 (`herakles-cow`) añade `scripts/c3r_carve.py` con 237 líneas
+  de tests y sigue **sin fusionar**. El carving de espacio libre se usa desde el PR o desde la rama, no
+  desde `main`. Es el repo que más se está moviendo.
+- **soimy/c3rb3r-rescue** — los issues son la fuente viva: #22 (EXT4 sin ruta), #23 (caso del 65% con las
+  cinco vías), #24 (memoria sin `capture.json`: leer los 48 B en `0x5427f8`), #10 (xattr de descarga como IOC).
+- **hjs785053766/c3rb3r-btrfs-recovery** — publicado con 37 scripts y manual en chino; su quinta vía
+  (repo de Synology Drive) rinde 34,4% en bloques de 500–1000 MB.
+
 ## Herramientas propias
 
 - `scripts/` de este repo: `censo_modos.py`, `inventario_rutas.py`, `tallar_pool.py`, `reparar_pdf.py`, `reparar_office.py`, `rescatar_fotos.py` y el resto del kit.

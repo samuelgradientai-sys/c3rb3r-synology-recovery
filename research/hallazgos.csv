@@ -14,3 +14,12 @@ fecha,tema,hallazgo,fuente,veredicto
 2026-11-03,jpeg,"Pasar la altura holgada (8192) al header evita el error 'recovered scan does not fit the sample dimensions' y no hay que adivinar la resolucion",prueba propia,confirmado
 2026-11-03,jpeg,"Con muestra se usa recover_bytes; el camino sampleless tarda 12-30 s por foto y se cuelga con archivos de varios tramos en cero",prueba propia,confirmado
 2026-11-03,expectativas,"Sin memoria ni snapshots la referencia honesta es ~9,4% de archivos / 21,4% de bytes (caso de 1,29 M de archivos)",miyanagaaoi/L0CK3D-recover,referencia
+2026-11-04,oficial,"Synology publicó aviso (2-nov): la campaña explota una falla parcheada en diciembre de 2024 (SA-24:20: CVE-2024-10441 RCE, CVE-2024-50629 lectura, CVE-2024-10445 escritura); versiones corregidas desde 7.2.2-72806-1 y 6.2.4-25556-8","Synology via BleepingComputer, 2-nov-2026",confirmado
+2026-11-04,superficie,Shadowserver rastrea más de 380.000 NAS Synology con la interfaz expuesta a internet,"BleepingComputer, 2-nov-2026",referencia
+2026-11-04,memoria,"Si el volcado no está en formato capture.json (páginas sueltas, ceros omitidos) no hace falta el capturador: los 48 B de la maestra se leen directo en el puntero 0x5427f8","soimy issue #24 (DS420+, DSM 7.2.1)",referencia
+2026-11-04,memoria,"Las direcciones del binario 802ac85d se repiten entre víctimas: firma de entrada 0x401f90, byte de modo 0x53fc8c y puntero de la maestra 0x5427f8",soimy issue #24,referencia
+2026-11-04,resultados,"Caso DS420+ con memoria propia: 159 de 159 archivos con SHA-256 exacto tras descifrar, en los tres modos y 97 tipos de archivo",soimy issue #24,referencia
+2026-11-04,drive,"El repo de Synology Drive (@synologydrive/@sync/repo) guarda bloques cifrados: 34,4% recuperable en bloques de 500-1000 MB y solo 5,4% en los de 128-500 MB",soimy issue #23 (hjs),referencia
+2026-11-04,video,Validar video con 'ffmpeg -xerror' da entre 2% y 22% de falsos negativos (un frame malo descarta un archivo que sí reproduce); usar criterio suave: decodificar 3 s,soimy issue #23 (hjs),referencia
+2026-11-04,ext4,Caso EXT4 + reiniciado + sin snapshots ni backups: sin copy-on-write no hay ruta conocida sin llave; el hilo sigue abierto esperando análisis de espacio libre y journaling,soimy issue #22,teoria
+2026-11-04,carving,"El PR crt106#1 empaqueta el carving de espacio libre con 237 líneas de tests y sigue sin fusionar: se usa desde el PR o la rama, no desde main",crt106 PR #1 (herakles-cow),confirmado

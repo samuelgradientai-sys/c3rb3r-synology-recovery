@@ -36,5 +36,7 @@ IP del C2) sí van: son públicos y útiles.
 
 - `hallazgos.csv` — registro cronológico, una línea por hallazgo.
 - `repositorios.md` — catálogo de repositorios evaluados, con qué aportan y qué requisito piden.
+- `casos.md` — casos publicados con sus cifras reales, para no prometer de más.
+- `iocs.md` — hashes, direcciones internas del binario, red y archivos: lo que identifica la campaña.
 - `fuentes.md` — foros, hilos, blogs, portales de descifradores y el criterio para detectar estafas.
 - `../docs/references/` — las técnicas en detalle (formato, Btrfs, tallado, transporte, fotos).
