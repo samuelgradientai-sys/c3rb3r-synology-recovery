@@ -1,0 +1,16 @@
+fecha,tema,hallazgo,fuente,veredicto
+2026-10-30,criptografia,"La llave es por archivo y viaja en el footer de 588 B: juntar archivos no permite un descifrado conjunto",analisis propio + soimy/c3rb3r-rescue,confirmado
+2026-10-30,criptografia,"ChaCha8 por archivo + registro AES-CBC con una maestra de 48 B por sesion que solo vive en la RAM del proceso",analisis propio,confirmado
+2026-10-30,modos,"0x24 (archivos <=1 MiB) se cifra completo: 0% recuperable por extents; 0x26 pierde el primer MiB; 0x25 pierde 3 tramos (~12%)",crt106/c3rb3r-btrfs-recovery,confirmado
+2026-10-30,footer,"El modo esta en archivo[-16] (no en el byte 575) y el byte -14 distingue cifrado real (0x20) de senuelo (0x21)",analisis propio,confirmado
+2026-10-31,memoria,"Sin proceso vivo no hay llave: tras un reinicio la maestra se perdio y la via de memoria quedo cerrada",caso propio,confirmado
+2026-10-31,claves,"La clave publicada por la comunidad no descifra otra victima: el marcador de sesion es distinto en cada ataque",soimy issue #5,confirmado
+2026-11-01,btrfs,"Con NoCOW y 0 snapshots la via de extents viejos no aplica: 0 de 902 archivos con candidato",preflight de crt106,confirmado
+2026-11-01,active backup,"El pool de Active Backup se cifra en 0x25 y queda ~88% en claro; es la mejor fuente interna de documentos",analisis propio,confirmado
+2026-11-01,office,"En 0x26 el primer MiB se lleva workbook.xml y las hojas: se recuperan media y drawings, no los datos",prueba propia,confirmado
+2026-11-01,pdf,"PDF en 0x25/0x26 se rearma agregando un Catalog/Pages nuevo a los objetos de pagina; ~79% queda con paginas legibles",prueba propia,confirmado
+2026-11-02,carving,"El tallado del espacio libre recupera ~1,7% de los archivos 0x24 (117 de 6.725 en un caso publicado)",sunkangbo121 (issue #12 de soimy),referencia
+2026-11-02,jpeg,"Las fotos de un 0x26/0x25 se rearman con la cabecera de una foto sana del mismo sensor; el rescate generico devuelve 0",DRCRecoveryData/JPEG_Recovery (jpegmedic),confirmado
+2026-11-03,jpeg,"Pasar la altura holgada (8192) al header evita el error 'recovered scan does not fit the sample dimensions' y no hay que adivinar la resolucion",prueba propia,confirmado
+2026-11-03,jpeg,"Con muestra se usa recover_bytes; el camino sampleless tarda 12-30 s por foto y se cuelga con archivos de varios tramos en cero",prueba propia,confirmado
+2026-11-03,expectativas,"Sin memoria ni snapshots la referencia honesta es ~9,4% de archivos / 21,4% de bytes (caso de 1,29 M de archivos)",miyanagaaoi/L0CK3D-recover,referencia

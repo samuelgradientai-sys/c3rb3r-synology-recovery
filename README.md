@@ -47,6 +47,7 @@ no sirve. Sin llave no hay descifrado mágico; lo que se rescata es lo que el ci
 ```
 docs/                 informe del incidente, bitácora de estado y notas de investigación
 docs/references/      formato .L0CK3D, transporte, tallado, compatibilidad, trampas
+research/             lo que vamos averiguando: hallazgos, repositorios y fuentes evaluadas
 scripts/              kit del NAS (Python, solo lectura) + reparadores por formato
 scripts/hjs/          driver original del método bookend (referencia)
 scripts/taller/       reparador de cabeceras ZIP
