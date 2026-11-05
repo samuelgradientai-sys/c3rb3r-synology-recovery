@@ -26,3 +26,17 @@ Ordenados por resultado. Actualizado: 4-nov-2026.
   caso abierto con esa configuración sigue sin resultado.
 - Los porcentajes altos se miden por **tipo de archivo** y excluyen miniaturas. Un "65%" global con
   fotos al 97,9% cuenta una historia distinta a un 65% parejo.
+
+## Caso con rescate por memoria (oct-2026)
+
+Una víctima de esta ola recuperó la clave **suspendiendo el proceso y volcando su memoria**, y descifró con
+ella. Es la única vía documentada que no pasa por pagar, y exige llegar antes que el reinicio: si el equipo
+ya se reinició, la clave se fue con la RAM.
+
+## Víctima ya parcheada contra SA-26:13 (28-oct-2026)
+
+El equipo de respuesta **Solar** atendió un NAS que ya corría **DSM 7.4.1-90080 Update 1** —es decir, por
+encima de los builds de SA-26:13— y estaba cifrado igual. El punto de entrada de ese caso sigue sin
+resolver; se barajan un fallo nuevo, un paquete de terceros o credenciales filtradas. Consecuencia
+práctica: "estoy al día" no es un argumento para descartar compromiso, y el parcheo no sustituye a sacar
+la administración de internet.

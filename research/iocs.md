@@ -62,6 +62,21 @@ Que las direcciones coincidan no significa que la llave sirva: **la maestra es a
   del atacante como la víctima. No se comparten, ni con quien ofrezca "rescate".
 - El hash de un archivo cifrado concreto: no identifica el malware, identifica a quien lo tiene.
 
+## Qué disparó la ola (25-oct-2026)
+
+Un **PoC funcional de CVE-2024-10441** apareció en GitHub el **25-oct-2026**
+([Ntn10/cve-2024-10441-synology-rce](https://github.com/Ntn10/cve-2024-10441-synology-rce), 7 archivos, ~24 KB).
+Reproduce la cadena completa: el campo `account` del login inyecta el marcador de cierre
+`PLUGIN_VALUE_END`, rompe el formato KEY=VALUE del fichero de entorno de `synoplugind`, cuela `LD_PRELOAD` y
+ejecuta código como **root antes de validar credenciales**. Tres días después empiezan los reportes masivos
+de víctimas (28-29 oct). La correlación temporal es la explicación más simple de la ola: no hubo zero-day
+nuevo, hubo **exploit público de un fallo de 2024**.
+
+Origen del fallo: **Pwn2Own Ireland 2024** (ZDI-CAN-25403, DEVCORE). La investigación de Rapid7
+(*Disguise Delimit*, DEF CON 2025) lo clasifica como **CWE-141** (neutralización de delimitadores), no
+CWE-116; Synology lo publicó como CWE-116. El vector es el mismo: inyección de variables de entorno en el
+plugin de login, puerto 5000/5001 (o 80/443).
+
 ## Superficie expuesta y parches: cuál es la puerta y cuál el hardening
 
 Shadowserver rastrea **más de 380.000 NAS Synology** con la interfaz publicada en internet. Hay dos
