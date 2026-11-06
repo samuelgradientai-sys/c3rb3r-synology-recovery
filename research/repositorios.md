@@ -45,6 +45,28 @@ real, no por popularidad. Última revisión: 3-nov-2026.
 - [weilizhang0813-eng/C3RB3R](https://github.com/weilizhang0813-eng/C3RB3R) — investigación del formato; sin descifrador funcional.
 - [sunkangbo121-ship-it/c3rb3r-btrfs-extent-rescue](https://github.com/sunkangbo121-ship-it/c3rb3r-btrfs-extent-rescue) — extents de Btrfs; midió 117 de 6.725 `0x24` recuperados.
 
+## Ampliación de crt106 (3-nov-2026): 5 rutas en vez de 1
+
+[wangyilindahaoren-glitch/c3rb3r-nas-recovery-lab](https://github.com/wangyilindahaoren-glitch/c3rb3r-nas-recovery-lab)
+— MIT, 81 scripts, 19 documentos. Es un superconjunto de crt106 (reconoce la autoría del upstream) que añade
+lo que a crt106 le falta:
+
+| Ruta | Qué hace | Cuándo sirve |
+|---|---|---|
+| A · extents viejos | La de crt106, con casos límite | Volumen CoW con extents supervivientes |
+| B · `plain_extract.py` | Corta el tramo en claro usando el marcador de 588 B | Todo `0x25` / `0x26` |
+| C · `plain_index.py` | Índice de texto plano en todo el volumen + búsqueda de copias | Cuando hay duplicados (el caso más rentable) |
+| D · carving | 3 escáneres: firma `.osheet`, magia genérica, reclamo por cuerpo OLE2 | `0x24` pequeños |
+| **E · ext4** | `ext4_probe.py` exporta el **journal jbd2** + inodos borrados; `jrn_match.py` busca los bytes viejos ahí | Volúmenes ext4 |
+| Drive | Reconstrucción byte-exacta del `.osheet` desde `.git/objects` | Ver nota abajo |
+
+**La idea nueva y la mejor del repo:** Synology Drive guarda cada documento como un repo git, y los blob de
+`.git/objects` **no tienen extensión**, así que el cifrador no los toca. Se reconstruye el contenedor desde
+ahí y el SHA-256 coincide con el original.
+
+Honestidad del autor, que se agradece: la ruta ext4 pasó 28 aserciones sobre muestras sintéticas y **no está
+validada en un equipo ext4 real**.
+
 ## Para trabajar offline con los discos (no específico de C3RB3R)
 
 | Repositorio | Qué aporta | Estado |

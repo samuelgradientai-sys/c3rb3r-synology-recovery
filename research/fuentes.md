@@ -25,6 +25,7 @@ DeadBolt en Emsisoft, por ejemplo, exige la llave que dan los atacantes después
 | nashub.vn, l0ck3d.com | Bitácoras de casos en vivo; útiles para cifras de recuperación. |
 | **360 (Qihoo)** — `360.cn/n/13055.html` (29-oct) | Primer aviso técnico: cifrado ChaCha8 + RSA-2048, 187 extensiones completas, 27 directorios saltados, atribución a SA-26:13. |
 | **Synology** — comunicado 29-oct + SA-24:20 | La puerta que confirma el fabricante es la de diciembre-2024. |
+| **ThaiCERT** (3-nov) | Alerta institucional en inglés; recuerda que Synology no confirmó cuál de los tres CVE de SA-24:20 es el vector. |
 | **HKCERT** (2-nov) y **KISA** (Corea, 28-oct) | Alertas institucionales; confirman alcance en Asia y el patrón de reportes desde el 28. |
 | **Rapid7, "Disguise Delimit"** (DEF CON 2025) | Whitepaper con la causa raíz de CVE-2024-10441: inyección de delimitadores en el plugin de login, CWE-141. |
 | **soimy — `docs/attack-path.md`** | Reconstrucción pública de una cadena de ataque de esta ola (versión DSM, cron `synotgkk`, URL de descarga, hash del cifrador). |

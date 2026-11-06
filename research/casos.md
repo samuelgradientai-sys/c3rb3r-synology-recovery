@@ -40,3 +40,35 @@ encima de los builds de SA-26:13— y estaba cifrado igual. El punto de entrada 
 resolver; se barajan un fallo nuevo, un paquete de terceros o credenciales filtradas. Consecuencia
 práctica: "estoy al día" no es un argumento para descartar compromiso, y el parcheo no sustituye a sacar
 la administración de internet.
+
+## Caso btrfs con 65,4 % de recuperación (2-nov-2026, publicado en issues de soimy)
+
+Volumen btrfs al 97 % de ocupación, ~206.000 archivos cifrados (1,03 TB), tres directorios de usuario.
+Rendimiento medido por tipo, sin contar miniaturas:
+
+| Tipo | Recuperado |
+|---|---|
+| Fotos originales (1-128 MB) | **97,9 %** |
+| Vídeo (1-128 MB) | **99,4 %** |
+| Vídeo grande (>128 MB) | 80,8 % |
+| Miniaturas (<1 MB) | ~55 % |
+| **Total sin miniaturas** | **65,4 %** |
+
+Rendimiento por ruta: extents CoW viejos **92-100 %**, bookend de raíz vieja 30-60 %, costura de segmentos
+63-89 %, carving de espacio libre 48-55 %. La fórmula de costura se generaliza a cualquier porcentaje:
+`ln = (N // 100) * PF[pct]`, `gap = (N - 3*ln) // 2` — resuelve la limitación de crt106, que solo modela
+`pct = 10`.
+
+Dos trampas que costaron tiempo: `ffmpeg -xerror` es demasiado estricto (2-22 % de falsos negativos; basta
+que decodifique 3 s) y el NAS se trabaja con `O_NOATIME` pasando los scripts por tubería SSH, sin dejar
+archivos en él.
+
+## Censo completo de un DS420+ (3-nov-2026): la marca de sesión, confirmada
+
+DSM 7.2.1 Update 5, Btrfs, mismo binario `802ac85d`. Censó **380.836 archivos** de un share: todos con
+marcador `4418882c` —distinto del `ce35a593` de otro incidente— y modo cripto `0x20`, cero anomalías.
+Reparto: `0x25` 208.591 · `0x24` 143.905 · `0x26` 28.340.
+
+Con su propia clave, extraída de memoria: **29 de 29 archivos descifrados con SHA-256 idéntico al original**,
+incluidos cuatro que la reconstrucción por extents solo había recuperado en parte. Confirma dos cosas: la
+marca es por sesión (no por muestra) y el nonce duplicado sirve de filtro real, no de debilidad.
